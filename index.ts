@@ -1,6 +1,6 @@
 /// Folder Data
 
-export interface Metadata {
+export type Metadata = {
   bitrate?: number;
   duration: string;
   album?: string;
@@ -9,7 +9,43 @@ export interface Metadata {
   year?: number;
 }
 
-export interface Item {
+export interface ItemBase {
+  name: string;
+  url: string;
+  src: string;
+  birthTime: Date;
+  numberOfThisExt: number;
+}
+
+export interface ItemFolder extends ItemBase {
+  type: 'folder';
+  ext: null;
+}
+
+export enum AudioExts {
+  MP3 = 'mp3',
+  WAV = 'wav',
+}
+
+export interface ItemAudio extends ItemBase {
+  type: 'file';
+  ext: AudioExts;
+  metadata: Metadata;
+}
+
+export enum PictureExts {
+  JPG = 'jpg',
+  PNG = 'png',
+}
+
+export interface ItemPicture extends ItemBase {
+  type: 'file';
+  ext: PictureExts;
+}
+
+export type Item = ItemPicture | ItemAudio | ItemFolder;
+
+/*export interface Item {
   name: string;
   type: string;
   ext: string | null;
@@ -17,7 +53,7 @@ export interface Item {
   numberOfThisExt: number;
   birthTime: Date;
   metadata?: Metadata;
-}
+}*/
 
 export interface LinkedFile {
   name: string;
