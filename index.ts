@@ -82,7 +82,7 @@ export interface Paths {
 }
 
 export interface FolderData {
-  linkedFile: LinkedFile | string;
+  linkedFile: LinkedFile | null;
   currentDirectory: string;
   filesList: Item[];
   playlist: PlaylistItem[] | null;
