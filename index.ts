@@ -61,6 +61,7 @@ export interface NavItem {
 export interface PlaylistItem {
   name: string;
   ext: string;
+  src: string;
   url: string;
   thisIsLinkedFile: boolean;
   metadata?: Metadata;
