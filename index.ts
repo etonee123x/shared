@@ -2,12 +2,12 @@
 
 export type Metadata = {
   bitrate?: number;
-  duration: string;
+  duration: number;
   album?: string;
   artists?: string[];
   bpm?: number;
   year?: number;
-}
+};
 
 export interface ItemBase {
   name: string;
@@ -45,20 +45,11 @@ export interface ItemPicture extends ItemBase {
 
 export type Item = ItemPicture | ItemAudio | ItemFolder;
 
-/*export interface Item {
-  name: string;
-  type: string;
-  ext: string | null;
-  url: string;
-  numberOfThisExt: number;
-  birthTime: Date;
-  metadata?: Metadata;
-}*/
-
 export interface LinkedFile {
   name: string;
   ext: string;
   url: string;
+  src: string;
   metadata?: Metadata;
 }
 
