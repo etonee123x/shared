@@ -73,6 +73,7 @@ export class AudioItem extends FileItem {
 
 export enum PictureExts {
   JPG = '.jpg',
+  JPEG = '.jpeg',
   PNG = '.png',
 }
 

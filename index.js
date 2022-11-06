@@ -52,6 +52,7 @@ export class AudioItem extends FileItem {
 export var PictureExts;
 (function (PictureExts) {
     PictureExts["JPG"] = ".jpg";
+    PictureExts["JPEG"] = ".jpeg";
     PictureExts["PNG"] = ".png";
 })(PictureExts || (PictureExts = {}));
 export class PictureItem extends FileItem {
