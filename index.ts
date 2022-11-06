@@ -1,5 +1,3 @@
-/// Folder Data
-
 export type Metadata = {
   bitrate?: number;
   duration: number;
@@ -9,74 +7,118 @@ export type Metadata = {
   year?: number;
 };
 
-export interface ItemBase {
+export class BaseItem {
   name: string;
   url: string;
   src: string;
-  birthTime: Date;
-  numberOfThisExt: number;
+  birthtime: Date;
+  numberOfThisExt?: number;
+  constructor ({ name, url, src, birthtime, numberOfThisExt }: BaseItem) {
+    this.name = name;
+    this.url = url;
+    this.src = src;
+    this.birthtime = birthtime;
+    this.numberOfThisExt = numberOfThisExt;
+  }
 }
 
-export interface ItemFolder extends ItemBase {
-  type: 'folder';
-  ext: null;
+export enum ItemTypes {
+  FOLDER = 'folder',
+  FILE = 'file',
+}
+
+export class FolderItem extends BaseItem {
+  type = ItemTypes.FOLDER;
+  ext = null;
+}
+
+export class FileItem extends BaseItem {
+  type = ItemTypes.FILE;
+}
+
+export class LinkedFileItem extends FileItem {
+  ext: string;
+  private _metadata: Metadata | undefined;
+  constructor (fileItem: FileItem, { ext }: { ext: string }) {
+    super(fileItem);
+    this.ext = ext;
+  }
+
+  set metadata (value: Metadata | undefined) {
+    this._metadata = value;
+  }
+
+  get metadata () {
+    return this._metadata;
+  }
 }
 
 export enum AudioExts {
-  MP3 = 'mp3',
-  WAV = 'wav',
+  MP3 = '.mp3',
+  WAV = '.wav',
 }
 
-export interface ItemAudio extends ItemBase {
-  type: 'file';
+export class AudioItem extends FileItem {
   ext: AudioExts;
   metadata: Metadata;
+  constructor (
+    fileItem: FileItem,
+    { metadata, ext }: { metadata: Metadata, ext: AudioExts },
+  ) {
+    super(fileItem);
+    this.metadata = metadata;
+    this.ext = ext;
+  }
 }
 
 export enum PictureExts {
-  JPG = 'jpg',
-  PNG = 'png',
+  JPG = '.jpg',
+  PNG = '.png',
 }
 
-export interface ItemPicture extends ItemBase {
-  type: 'file';
+export class PictureItem extends FileItem {
   ext: PictureExts;
+  constructor (fileItem: FileItem, { ext }: { ext: PictureExts }) {
+    super(fileItem);
+    this.ext = ext;
+  }
 }
 
-export type Item = ItemPicture | ItemAudio | ItemFolder;
-
-export interface LinkedFile {
-  name: string;
-  ext: string;
-  url: string;
-  src: string;
-  metadata?: Metadata;
+export class PlaylistItem extends AudioItem {
+  thisIsLinkedFile: boolean;
+  constructor (audioItem: AudioItem, { thisIsLinkedFile }: { thisIsLinkedFile: boolean }) {
+    super({
+      birthtime: audioItem.birthtime,
+      src: audioItem.src,
+      url: audioItem.url,
+      name: audioItem.name,
+      numberOfThisExt: audioItem.numberOfThisExt,
+      type: audioItem.type,
+    }, {
+      metadata: audioItem.metadata,
+      ext: audioItem.ext,
+    });
+    this.thisIsLinkedFile = thisIsLinkedFile;
+  }
 }
+
+export type Item = PictureItem | AudioItem | FolderItem;
 
 export interface NavItem {
   text: string;
   link: string;
 }
 
-export interface PlaylistItem {
-  name: string;
-  ext: string;
-  src: string;
-  url: string;
-  thisIsLinkedFile: boolean;
-  metadata?: Metadata;
-}
-
 export interface Paths {
-  rel: string;
   abs: string;
+  rel: string;
   lvlUp: string | null;
 }
 
 export interface FolderData {
-  linkedFile: LinkedFile | null;
+  linkedFile: BaseItem | null;
   currentDirectory: string;
-  filesList: Item[];
+  items: Item[];
   playlist: PlaylistItem[] | null;
   paths: Paths;
   navigation: NavItem[];
@@ -159,3 +201,12 @@ export type OtherOptions = {
   useFastMode?: boolean;
   onLoading?: (arg0: onLoadingParams) => unknown;
 };
+
+class KnownError extends Error {
+
+}
+
+export type ErrorLike = KnownError | Error
+export type LoginAndPassword = { login: string, password: string }
+
+export type TokenOrLoginAndPassword = { token: string } | LoginAndPassword
