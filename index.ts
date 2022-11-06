@@ -116,7 +116,7 @@ export interface Paths {
 }
 
 export interface FolderData {
-  linkedFile: BaseItem | null;
+  linkedFile: LinkedFileItem | null;
   currentDirectory: string;
   items: Item[];
   playlist: PlaylistItem[] | null;
