@@ -1,3 +1,11 @@
+export enum Routes {
+  GET_FOLDER_DATA = '/get-folder-data*',
+  HAPPY_NORMING = '/happy-norming/',
+  FUNNY_ANIMALS = '/funny-animals/',
+  AUTH = '/auth/',
+  PARSER = '/parser/'
+}
+
 export type Metadata = {
   bitrate?: number;
   duration: number;
@@ -203,7 +211,7 @@ export type OtherOptions = {
   onLoading?: (arg0: onLoadingParams) => unknown;
 };
 
-class KnownError extends Error {
+export class KnownError extends Error {
 
 }
 

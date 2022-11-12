@@ -1,3 +1,11 @@
+export var Routes;
+(function (Routes) {
+    Routes["GET_FOLDER_DATA"] = "/get-folder-data*";
+    Routes["HAPPY_NORMING"] = "/happy-norming/";
+    Routes["FUNNY_ANIMALS"] = "/funny-animals/";
+    Routes["AUTH"] = "/auth/";
+    Routes["PARSER"] = "/parser/";
+})(Routes || (Routes = {}));
 export class BaseItem {
     constructor({ name, url, src, birthtime, numberOfThisExt }) {
         this.name = name;
@@ -77,5 +85,5 @@ export class PlaylistItem extends AudioItem {
         this.thisIsLinkedFile = thisIsLinkedFile;
     }
 }
-class KnownError extends Error {
+export class KnownError extends Error {
 }
