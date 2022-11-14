@@ -118,18 +118,11 @@ export interface NavItem {
   link: string;
 }
 
-export interface Paths {
-  abs: string;
-  rel: string;
-  lvlUp: string | null;
-}
-
 export interface FolderData {
   linkedFile: LinkedFileItem | null;
-  currentDirectory: string;
   items: Item[];
   playlist: PlaylistItem[] | null;
-  paths: Paths;
+  lvlUp: string | null;
   navigation: NavItem[];
 }
 
