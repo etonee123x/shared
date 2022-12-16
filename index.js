@@ -33,18 +33,6 @@ export class FileItem extends BaseItem {
         this.type = ItemTypes.FILE;
     }
 }
-export class LinkedFileItem extends FileItem {
-    constructor(fileItem, { ext }) {
-        super(fileItem);
-        this.ext = ext;
-    }
-    set metadata(value) {
-        this._metadata = value;
-    }
-    get metadata() {
-        return this._metadata;
-    }
-}
 export var AudioExts;
 (function (AudioExts) {
     AudioExts["MP3"] = ".mp3";

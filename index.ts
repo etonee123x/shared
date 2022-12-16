@@ -19,7 +19,7 @@ export class BaseItem {
   name: string;
   url: string;
   src: string;
-  birthtime: Date;
+  birthtime: string;
   numberOfThisExt?: number;
   constructor ({ name, url, src, birthtime, numberOfThisExt }: BaseItem) {
     this.name = name;
@@ -42,23 +42,6 @@ export class FolderItem extends BaseItem {
 
 export class FileItem extends BaseItem {
   type = ItemTypes.FILE;
-}
-
-export class LinkedFileItem extends FileItem {
-  ext: string;
-  private _metadata: Metadata | undefined;
-  constructor (fileItem: FileItem, { ext }: { ext: string }) {
-    super(fileItem);
-    this.ext = ext;
-  }
-
-  set metadata (value: Metadata | undefined) {
-    this._metadata = value;
-  }
-
-  get metadata () {
-    return this._metadata;
-  }
 }
 
 export enum AudioExts {
@@ -119,7 +102,7 @@ export interface NavItem {
 }
 
 export interface FolderData {
-  linkedFile: LinkedFileItem | null;
+  linkedFile: PictureItem | AudioItem | null;
   items: Item[];
   playlist: PlaylistItem[] | null;
   lvlUp: string | null;
