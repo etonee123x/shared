@@ -1,4 +1,4 @@
-export enum Routes {
+export enum ROUTE {
   GET_FOLDER_DATA = '/get-folder-data*',
   HAPPY_NORMING = '/happy-norming/',
   FUNNY_ANIMALS = '/funny-animals/',
@@ -30,31 +30,31 @@ export class BaseItem {
   }
 }
 
-export enum ItemTypes {
+export enum ITEM_TYPE {
   FOLDER = 'folder',
   FILE = 'file',
 }
 
 export class FolderItem extends BaseItem {
-  type = ItemTypes.FOLDER;
+  type = ITEM_TYPE.FOLDER;
   ext = null;
 }
 
 export class FileItem extends BaseItem {
-  type = ItemTypes.FILE;
+  type = ITEM_TYPE.FILE;
 }
 
-export enum AudioExts {
+export enum AUDIO_EXT {
   MP3 = '.mp3',
   WAV = '.wav',
 }
 
 export class AudioItem extends FileItem {
-  ext: AudioExts;
+  ext: AUDIO_EXT;
   metadata: Metadata;
   constructor (
     fileItem: FileItem,
-    { metadata, ext }: { metadata: Metadata, ext: AudioExts },
+    { metadata, ext }: { metadata: Metadata, ext: AUDIO_EXT },
   ) {
     super(fileItem);
     this.metadata = metadata;
@@ -62,15 +62,15 @@ export class AudioItem extends FileItem {
   }
 }
 
-export enum PictureExts {
+export enum PICTURE_EXT {
   JPG = '.jpg',
   JPEG = '.jpeg',
   PNG = '.png',
 }
 
 export class PictureItem extends FileItem {
-  ext: PictureExts;
-  constructor (fileItem: FileItem, { ext }: { ext: PictureExts }) {
+  ext: PICTURE_EXT;
+  constructor (fileItem: FileItem, { ext }: { ext: PICTURE_EXT }) {
     super(fileItem);
     this.ext = ext;
   }
@@ -94,7 +94,9 @@ export class PlaylistItem extends AudioItem {
   }
 }
 
-export type Item = PictureItem | AudioItem | FolderItem;
+export type FileWithKnownType = PictureItem | AudioItem
+
+export type Item = FileWithKnownType | FolderItem;
 
 export interface NavItem {
   text: string;
@@ -102,7 +104,7 @@ export interface NavItem {
 }
 
 export interface FolderData {
-  linkedFile: PictureItem | AudioItem | null;
+  linkedFile: FileWithKnownType | null;
   items: Item[];
   playlist: PlaylistItem[] | null;
   lvlUp: string | null;
