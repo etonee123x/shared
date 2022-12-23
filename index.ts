@@ -76,24 +76,6 @@ export class PictureItem extends FileItem {
   }
 }
 
-export class PlaylistItem extends AudioItem {
-  thisIsLinkedFile: boolean;
-  constructor (audioItem: AudioItem, { thisIsLinkedFile }: { thisIsLinkedFile: boolean }) {
-    super({
-      birthtime: audioItem.birthtime,
-      src: audioItem.src,
-      url: audioItem.url,
-      name: audioItem.name,
-      numberOfThisExt: audioItem.numberOfThisExt,
-      type: audioItem.type,
-    }, {
-      metadata: audioItem.metadata,
-      ext: audioItem.ext,
-    });
-    this.thisIsLinkedFile = thisIsLinkedFile;
-  }
-}
-
 export type FileWithKnownType = PictureItem | AudioItem
 
 export type Item = FileWithKnownType | FolderItem;
@@ -106,7 +88,6 @@ export interface NavItem {
 export interface FolderData {
   linkedFile: FileWithKnownType | null;
   items: Item[];
-  playlist: PlaylistItem[] | null;
   lvlUp: string | null;
   navigation: NavItem[];
 }

@@ -57,21 +57,5 @@ export class PictureItem extends FileItem {
         this.ext = ext;
     }
 }
-export class PlaylistItem extends AudioItem {
-    constructor(audioItem, { thisIsLinkedFile }) {
-        super({
-            birthtime: audioItem.birthtime,
-            src: audioItem.src,
-            url: audioItem.url,
-            name: audioItem.name,
-            numberOfThisExt: audioItem.numberOfThisExt,
-            type: audioItem.type,
-        }, {
-            metadata: audioItem.metadata,
-            ext: audioItem.ext,
-        });
-        this.thisIsLinkedFile = thisIsLinkedFile;
-    }
-}
 export class KnownError extends Error {
 }
