@@ -3,7 +3,8 @@ export enum ROUTE {
   HAPPY_NORMING = '/happy-norming/',
   FUNNY_ANIMALS = '/funny-animals/',
   AUTH = '/auth/',
-  PARSER = '/parser/'
+  PARSER = '/parser/',
+  MAIN_ROUTE = '/*'
 }
 
 export type Metadata = {

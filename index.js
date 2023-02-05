@@ -5,6 +5,7 @@ export var ROUTE;
     ROUTE["FUNNY_ANIMALS"] = "/funny-animals/";
     ROUTE["AUTH"] = "/auth/";
     ROUTE["PARSER"] = "/parser/";
+    ROUTE["MAIN_ROUTE"] = "/*";
 })(ROUTE || (ROUTE = {}));
 export class BaseItem {
     constructor({ name, url, src, birthtime, numberOfThisExt }) {
