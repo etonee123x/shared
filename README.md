@@ -1,2 +1,2 @@
 # types
-Types for binding together my projects
+Types for binding together my projects.
