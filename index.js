@@ -1,11 +1,11 @@
 export var ROUTE;
 (function (ROUTE) {
-    ROUTE["GET_FOLDER_DATA"] = "/get-folder-data*";
+    ROUTE["GET_FOLDER_DATA"] = "/get-folder-data/";
     ROUTE["HAPPY_NORMING"] = "/happy-norming/";
     ROUTE["FUNNY_ANIMALS"] = "/funny-animals/";
     ROUTE["AUTH"] = "/auth/";
     ROUTE["PARSER"] = "/parser/";
-    ROUTE["MAIN_ROUTE"] = "/*";
+    ROUTE["MAIN"] = "/";
 })(ROUTE || (ROUTE = {}));
 export class BaseItem {
     constructor({ name, url, src, birthtime, numberOfThisExt }) {

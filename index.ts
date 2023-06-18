@@ -1,10 +1,10 @@
 export enum ROUTE {
-  GET_FOLDER_DATA = '/get-folder-data*',
+  GET_FOLDER_DATA = '/get-folder-data/',
   HAPPY_NORMING = '/happy-norming/',
   FUNNY_ANIMALS = '/funny-animals/',
   AUTH = '/auth/',
   PARSER = '/parser/',
-  MAIN_ROUTE = '/*'
+  MAIN = '/'
 }
 
 export type Metadata = {
