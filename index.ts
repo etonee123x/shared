@@ -4,7 +4,7 @@ export enum ROUTE {
   FUNNY_ANIMALS = '/funny-animals/',
   AUTH = '/auth/',
   PARSER = '/parser/',
-  MAIN = '/'
+  MAIN = '/',
 }
 
 export type Metadata = {
@@ -55,7 +55,7 @@ export class AudioItem extends FileItem {
   metadata: Metadata;
   constructor (
     fileItem: FileItem,
-    { metadata, ext }: { metadata: Metadata, ext: AUDIO_EXT },
+    { metadata, ext }: { metadata: Metadata; ext: AUDIO_EXT },
   ) {
     super(fileItem);
     this.metadata = metadata;
@@ -176,6 +176,6 @@ export class KnownError extends Error {
 }
 
 export type ErrorLike = KnownError | Error
-export type LoginAndPassword = { login: string, password: string }
+export type LoginAndPassword = { login: string; password: string }
 
 export type TokenOrLoginAndPassword = { token: string } | LoginAndPassword
