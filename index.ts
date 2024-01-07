@@ -1,20 +1,19 @@
-export enum ROUTE {
-  GET_FOLDER_DATA = '/get-folder-data',
-  HAPPY_NORMING = '/happy-norming/',
-  FUNNY_ANIMALS = '/funny-animals/',
-  AUTH = '/auth/',
-  PARSER = '/parser/',
-  MAIN = '/',
+import type { ICommonTagsResult, IFormat } from 'music-metadata';
+
+export type NotEmptyArray<T> = [T, ...T[]];
+
+export type Falsy = false | 0 | 0n | '' | null | undefined;
+
+export enum HANDLER_NAME {
+  GET_FOLDER_DATA = 'GET_FOLDER_DATA',
+  HAPPY_NORMING = 'HAPPY_NORMING',
+  FUNNY_ANIMALS = 'FUNNY_ANIMALS',
 }
 
 export type Metadata = {
-  bitrate?: number;
-  duration: number;
-  album?: string;
-  artists?: string[];
-  bpm?: number;
-  year?: number;
-};
+  bitrate?: IFormat['bitrate'];
+  duration: NonNullable<IFormat['duration']>;
+} & Pick<ICommonTagsResult, 'album' | 'artists' | 'bpm' | 'year'>;
 
 export class BaseItem {
   name: string;
@@ -45,17 +44,17 @@ export class FileItem extends BaseItem {
   type = ITEM_TYPE.FILE;
 }
 
-export enum AUDIO_EXT {
+export enum EXT_AUDIO {
   MP3 = '.mp3',
   WAV = '.wav',
 }
 
 export class AudioItem extends FileItem {
-  ext: AUDIO_EXT;
+  ext: EXT_AUDIO;
   metadata: Metadata;
   constructor (
     fileItem: FileItem,
-    { metadata, ext }: { metadata: Metadata; ext: AUDIO_EXT },
+    { metadata, ext }: { metadata: Metadata; ext: EXT_AUDIO },
   ) {
     super(fileItem);
     this.metadata = metadata;
@@ -63,15 +62,15 @@ export class AudioItem extends FileItem {
   }
 }
 
-export enum PICTURE_EXT {
+export enum EXT_PICTURE {
   JPG = '.jpg',
   JPEG = '.jpeg',
   PNG = '.png',
 }
 
 export class PictureItem extends FileItem {
-  ext: PICTURE_EXT;
-  constructor (fileItem: FileItem, { ext }: { ext: PICTURE_EXT }) {
+  ext: EXT_PICTURE;
+  constructor (fileItem: FileItem, { ext }: { ext: EXT_PICTURE }) {
     super(fileItem);
     this.ext = ext;
   }
@@ -92,90 +91,3 @@ export interface FolderData {
   lvlUp: string | null;
   navigation: NavItem[];
 }
-
-/// RMS
-
-export type SampleRateValues = 44100 | 48000;
-
-export type Headers = {
-  channelsNumber: number;
-  sampleRate: SampleRateValues;
-  byteRate: number;
-  blockAlign: number;
-  bitsPerSample: number;
-};
-
-export type Channels = {
-  left: Float32Array;
-  right: Float32Array;
-};
-
-export type IntervalAndList = {
-  interval: {
-    min: number;
-    max: number;
-  };
-  list: number[];
-};
-
-export interface RMSValue extends IntervalAndList {
-  textBand: {
-    from: number | string;
-    to: number | string;
-  };
-}
-
-export type BandTitles = 'all' | 'b' | 'lm' | 'hm' | 'h';
-
-export type RMSValues = Record<BandTitles, RMSValue>;
-
-export type SpectrumValues = {
-  spectrum: Float32Array[];
-  nyquistFrequency: number;
-  lengthX: number;
-  lengthY: number;
-};
-
-export type AudioSegment = {
-  start: number;
-  end: number;
-};
-
-export type TheLoudestSegment = {
-  borders: AudioSegment;
-  channels: Channels;
-};
-
-export type WavData = {
-  headers?: Headers;
-  compressionRate: number;
-  compressedChannels?: Channels;
-  duration?: number;
-  theLoudestSegment?: TheLoudestSegment;
-};
-
-export type SpectrumOptions = {
-  windowSize: 128 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
-  overlap: number;
-  delayBetweenOperations: number;
-  shouldUseWindowFunction: boolean;
-};
-
-export type onLoadingParams = {
-  bandTitle: BandTitles;
-  progress: number;
-};
-
-export type OtherOptions = {
-  useFastMode?: boolean;
-  onLoading?: (arg0: onLoadingParams) => unknown;
-};
-
-export class KnownError extends Error {
-
-}
-
-export type ErrorLike = KnownError | Error
-export type LoginAndPassword = { login: string; password: string }
-
-export type TokenOrLoginAndPassword = { token: string } | LoginAndPassword
