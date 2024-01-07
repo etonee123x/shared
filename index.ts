@@ -78,7 +78,7 @@ export class PictureItem extends FileItem {
 
 export type FileWithKnownType = PictureItem | AudioItem
 
-export type Item = FileWithKnownType | FolderItem;
+export type Item = FileItem | FolderItem;
 
 export interface NavItem {
   text: string;
@@ -86,7 +86,7 @@ export interface NavItem {
 }
 
 export interface FolderData {
-  linkedFile: FileWithKnownType | null;
+  linkedFile: Item | null;
   items: Item[];
   lvlUp: string | null;
   navigation: NavItem[];
