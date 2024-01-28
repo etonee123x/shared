@@ -11,9 +11,10 @@ export enum HANDLER_NAME {
 }
 
 export type Metadata = {
-  bitrate?: IFormat['bitrate'];
+  bitrate: IFormat['bitrate'];
   duration: NonNullable<IFormat['duration']>;
-} & Pick<ICommonTagsResult, 'album' | 'artists' | 'bpm' | 'year'>;
+  artists: NonNullable<ICommonTagsResult['artists']>
+} & Pick<ICommonTagsResult, 'album' | 'bpm' | 'year'>;
 
 export class BaseItem {
   name: string;
