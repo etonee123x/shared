@@ -87,7 +87,7 @@ export interface NavItem {
 }
 
 export interface FolderData {
-  linkedFile: FileItem | null;
+  linkedFile: FileWithKnownType | null;
   items: Item[];
   lvlUp: string | null;
   navigation: NavItem[];
