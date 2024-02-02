@@ -44,8 +44,14 @@ export const createErrorServer = (data: CustomError['data']) => createError({
 });
 
 export const isCustomError = (arg: unknown): arg is CustomError =>
-  isRealObject(arg) && '__isCustomError' in arg && arg.__isCustomError === true;
+  isRealObject(arg) && arg.__isCustomError === true;
 
 export const isCustomErrorClient = (arg: CustomError) => arg.statusCode >= 400 && arg.statusCode < 500;
 export const isCustomErrorServer = (arg: CustomError) => arg.statusCode >= 500 && arg.statusCode < 600;
 export const isCustomErrorUnknown = (arg: CustomError) => arg.statusCode === CUSTOM_ERROR_UNKNOWN_STATUS_CODE;
+
+export const omit = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: T2[]): Omit<T1, T2> =>
+  Object.fromEntries(Object.entries(object).filter(([key]) => !keys.includes(key as T2))) as Omit<T1, T2>;
+
+export const pick = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: T2[]): Pick<T1, T2> =>
+    Object.fromEntries(Object.entries(object).filter(([key]) => keys.includes(key as T2))) as Pick<T1, T2>;
