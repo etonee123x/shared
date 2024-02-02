@@ -21,12 +21,15 @@ export class BaseItem {
   url: string;
   src: string;
   birthtime: string;
+
   numberOfThisExt?: number;
+
   constructor ({ name, url, src, birthtime, numberOfThisExt }: BaseItem) {
     this.name = name;
     this.url = url;
     this.src = src;
     this.birthtime = birthtime;
+
     this.numberOfThisExt = numberOfThisExt;
   }
 }
@@ -41,8 +44,11 @@ export class FolderItem extends BaseItem {
   ext = null;
 }
 
-export class FileItem extends BaseItem {
+export class FileItem<Ext extends string = string> extends BaseItem {
   type = ITEM_TYPE.FILE;
+  constructor (baseItem: Omit<FileItem<Ext>, 'ext' | 'type'>, public ext: Ext) {
+    super(baseItem);
+  }
 }
 
 export enum EXT_AUDIO {
@@ -50,16 +56,15 @@ export enum EXT_AUDIO {
   WAV = '.wav',
 }
 
-export class AudioItem extends FileItem {
-  ext: EXT_AUDIO;
+export class AudioItem extends FileItem<EXT_AUDIO> {
   metadata: Metadata;
+
   constructor (
-    fileItem: FileItem,
-    { metadata, ext }: { metadata: Metadata; ext: EXT_AUDIO },
+    { ext, ...baseItem }: Omit<AudioItem, 'metadata'>,
+    metadata: Metadata,
   ) {
-    super(fileItem);
+    super(baseItem, ext);
     this.metadata = metadata;
-    this.ext = ext;
   }
 }
 
@@ -69,15 +74,11 @@ export enum EXT_PICTURE {
   PNG = '.png',
 }
 
-export class PictureItem extends FileItem {
-  ext: EXT_PICTURE;
-  constructor (fileItem: FileItem, { ext }: { ext: EXT_PICTURE }) {
-    super(fileItem);
-    this.ext = ext;
+export class PictureItem extends FileItem<EXT_PICTURE> {
+  constructor ({ ext, ...baseItem }: PictureItem) {
+    super(baseItem, ext);
   }
 }
-
-export type FileWithKnownType = PictureItem | AudioItem
 
 export type Item = FileItem | FolderItem;
 
@@ -87,7 +88,7 @@ export interface NavItem {
 }
 
 export interface FolderData {
-  linkedFile: FileWithKnownType | null;
+  linkedFile: FileItem | null;
   items: Item[];
   lvlUp: string | null;
   navigation: NavItem[];
