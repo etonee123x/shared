@@ -1,5 +1,7 @@
 import type { ICommonTagsResult, IFormat } from 'music-metadata';
 
+export * from './utils';
+
 export type NotEmptyArray<T> = [T, ...T[]];
 
 export type Falsy = false | 0 | 0n | '' | null | undefined;
@@ -13,10 +15,19 @@ export enum HANDLER_NAME {
 export type Metadata = {
   bitrate: IFormat['bitrate'];
   duration: NonNullable<IFormat['duration']>;
-  artists: NonNullable<ICommonTagsResult['artists']>
+  artists: NonNullable<ICommonTagsResult['artists']>;
 } & Pick<ICommonTagsResult, 'album' | 'bpm' | 'year'>;
 
-export class BaseItem {
+export interface ItemBase {
+  name: string;
+  url: string;
+  src: string;
+  birthtime: string;
+
+  numberOfThisExt?: number;
+}
+
+export class ItemBase {
   name: string;
   url: string;
   src: string;
@@ -24,7 +35,7 @@ export class BaseItem {
 
   numberOfThisExt?: number;
 
-  constructor ({ name, url, src, birthtime, numberOfThisExt }: BaseItem) {
+  constructor ({ name, url, src, birthtime, numberOfThisExt }: ItemBase) {
     this.name = name;
     this.url = url;
     this.src = src;
@@ -39,14 +50,22 @@ export enum ITEM_TYPE {
   FILE = 'file',
 }
 
-export class FolderItem extends BaseItem {
-  type = ITEM_TYPE.FOLDER;
-  ext = null;
+export interface ItemFolder extends ItemBase {
+  type: ITEM_TYPE.FOLDER;
 }
 
-export class FileItem<Ext extends string = string> extends BaseItem {
-  type = ITEM_TYPE.FILE;
-  constructor (baseItem: Omit<FileItem<Ext>, 'ext' | 'type'>, public ext: Ext) {
+export class ItemFolder extends ItemBase {
+  type: ITEM_TYPE.FOLDER = ITEM_TYPE.FOLDER;
+}
+
+export interface ItemFile<Ext extends string = string> extends ItemBase {
+  type: ITEM_TYPE.FILE;
+  ext: Ext;
+}
+
+export class ItemFile<Ext extends string = string> extends ItemBase {
+  type: ITEM_TYPE.FILE = ITEM_TYPE.FILE;
+  constructor (baseItem: Omit<ItemFile<Ext>, 'ext' | 'type'>, public ext: Ext) {
     super(baseItem);
   }
 }
@@ -56,11 +75,15 @@ export enum EXT_AUDIO {
   WAV = '.wav',
 }
 
-export class AudioItem extends FileItem<EXT_AUDIO> {
+export interface ItemAudio extends ItemFile<EXT_AUDIO> {
+  metadata: Metadata;
+}
+
+export class ItemAudio extends ItemFile<EXT_AUDIO> {
   metadata: Metadata;
 
   constructor (
-    { ext, ...baseItem }: Omit<AudioItem, 'metadata'>,
+    { ext, ...baseItem }: Omit<ItemAudio, 'metadata'>,
     metadata: Metadata,
   ) {
     super(baseItem, ext);
@@ -74,13 +97,15 @@ export enum EXT_PICTURE {
   PNG = '.png',
 }
 
-export class PictureItem extends FileItem<EXT_PICTURE> {
-  constructor ({ ext, ...baseItem }: PictureItem) {
+export interface ItemPicture extends ItemFile<EXT_PICTURE> {}
+
+export class ItemPicture extends ItemFile<EXT_PICTURE> {
+  constructor ({ ext, ...baseItem }: ItemPicture) {
     super(baseItem, ext);
   }
 }
 
-export type Item = FileItem | FolderItem;
+export type Item = ItemFile | ItemFolder;
 
 export interface NavItem {
   text: string;
@@ -88,7 +113,7 @@ export interface NavItem {
 }
 
 export interface FolderData {
-  linkedFile: FileItem | null;
+  linkedFile: ItemFile | null;
   items: Item[];
   lvlUp: string | null;
   navigation: NavItem[];

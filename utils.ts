@@ -1,4 +1,15 @@
-import { EXT_AUDIO, EXT_PICTURE, NotEmptyArray, Falsy } from '.';
+import {
+  EXT_AUDIO,
+  EXT_PICTURE,
+  ITEM_TYPE,
+  type NotEmptyArray,
+  type Falsy,
+  type Item,
+  type ItemFolder,
+  type ItemFile,
+  type ItemAudio,
+  type ItemPicture,
+} from '.';
 
 const isString = (arg: unknown): arg is string => typeof arg === 'string';
 const isRealObject = (arg: unknown): arg is Record<string, unknown> =>
@@ -55,3 +66,11 @@ export const omit = <T1 extends Record<string, unknown>, T2 extends keyof T1>(ob
 
 export const pick = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: T2[]): Pick<T1, T2> =>
     Object.fromEntries(Object.entries(object).filter(([key]) => keys.includes(key as T2))) as Pick<T1, T2>;
+
+export const isExtAudio = (ext: string): ext is EXT_AUDIO => Object.values<string>(EXT_AUDIO).includes(ext);
+export const isExtPicture = (ext: string): ext is EXT_PICTURE => Object.values<string>(EXT_PICTURE).includes(ext);
+
+export const isItemFolder = (item: Item): item is ItemFolder => item.type === ITEM_TYPE.FOLDER;
+export const isItemFile = (item: Item): item is ItemFile => item.type === ITEM_TYPE.FILE;
+export const isItemAudio = (item: Item): item is ItemAudio => isItemFile(item) && isExtAudio(item.ext);
+export const isItemPicture = (item: Item): item is ItemPicture => isItemFile(item) && isExtPicture(item.ext);
