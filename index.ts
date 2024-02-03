@@ -2,7 +2,7 @@ import type { ICommonTagsResult, IFormat } from 'music-metadata';
 
 export * from './utils';
 
-export type NotEmptyArray<T> = [T, ...T[]];
+export type NotEmptyArray<T> = [T, ...Array<T>];
 
 export type Falsy = false | 0 | 0n | '' | null | undefined;
 
@@ -107,14 +107,14 @@ export class ItemPicture extends ItemFile<EXT_PICTURE> {
 
 export type Item = ItemFile | ItemFolder;
 
-export interface NavItem {
+export interface NavigationItem {
   text: string;
   link: string;
 }
 
 export interface FolderData {
   linkedFile: ItemFile | null;
-  items: Item[];
+  items: Array<Item>;
   lvlUp: string | null;
-  navigation: NavItem[];
+  navigationItems: Array<NavigationItem>;
 }

@@ -61,10 +61,12 @@ export const isCustomErrorClient = (arg: CustomError) => arg.statusCode >= 400 &
 export const isCustomErrorServer = (arg: CustomError) => arg.statusCode >= 500 && arg.statusCode < 600;
 export const isCustomErrorUnknown = (arg: CustomError) => arg.statusCode === CUSTOM_ERROR_UNKNOWN_STATUS_CODE;
 
-export const omit = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: T2[]): Omit<T1, T2> =>
-  Object.fromEntries(Object.entries(object).filter(([key]) => !keys.includes(key as T2))) as Omit<T1, T2>;
+export const omit
+  = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: Array<T2>): Omit<T1, T2> =>
+    Object.fromEntries(Object.entries(object).filter(([key]) => !keys.includes(key as T2))) as Omit<T1, T2>;
 
-export const pick = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: T2[]): Pick<T1, T2> =>
+export const pick
+  = <T1 extends Record<string, unknown>, T2 extends keyof T1>(object: T1, keys: Array<T2>): Pick<T1, T2> =>
     Object.fromEntries(Object.entries(object).filter(([key]) => keys.includes(key as T2))) as Pick<T1, T2>;
 
 export const isExtAudio = (ext: string): ext is EXT_AUDIO => Object.values<string>(EXT_AUDIO).includes(ext);
