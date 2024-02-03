@@ -11,8 +11,9 @@ import {
   type ItemPicture,
 } from '.';
 
-const isString = (arg: unknown): arg is string => typeof arg === 'string';
-const isRealObject = (arg: unknown): arg is Record<string, unknown> =>
+export const isString = (arg: unknown): arg is string => typeof arg === 'string';
+export const isArray = <T>(arg: unknown): arg is Array<T> => Array.isArray(arg);
+export const isRealObject = (arg: unknown): arg is Record<string, unknown> =>
   Boolean(arg && typeof arg === 'object' && !Array.isArray(arg));
 
 export const extIsAudio = (arg: unknown): arg is EXT_AUDIO =>
@@ -26,7 +27,7 @@ export const isNil = <T>(arg: T | null | undefined): arg is null | undefined => 
 export const isNotNil = <T>(arg: T | null | undefined): arg is T => !isNil(arg);
 
 export const isNotEmptyArray = <T>(arg: Array<T> | null | undefined): arg is NotEmptyArray<T> =>
-  Boolean(Array.isArray(arg) && arg.length);
+  Boolean(isArray(arg) && arg.length);
 
 export const isNotEmptyObject = (arg: unknown) =>
   Boolean(arg && typeof arg === 'object' && isNotEmptyArray(Object.keys(arg)));
@@ -76,3 +77,5 @@ export const isItemFolder = (item: Item): item is ItemFolder => item.type === IT
 export const isItemFile = (item: Item): item is ItemFile => item.type === ITEM_TYPE.FILE;
 export const isItemAudio = (item: Item): item is ItemAudio => isItemFile(item) && isExtAudio(item.ext);
 export const isItemPicture = (item: Item): item is ItemPicture => isItemFile(item) && isExtPicture(item.ext);
+
+export const wrapToArray = <T>(arg: T | Array<T>): Array<T> => isArray(arg) ? arg : [arg];
