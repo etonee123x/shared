@@ -87,3 +87,6 @@ export const isItemAudio = (item: Item): item is ItemAudio => isItemFile(item) &
 export const isItemPicture = (item: Item): item is ItemPicture => isItemFile(item) && isExtPicture(item.ext);
 
 export const wrapToArray = <T>(arg: T | Array<T>): Array<T> => (isArray(arg) ? arg : [arg]);
+
+export const toLowerCase = <T extends string>(string: T): Lowercase<T> => string.toLowerCase() as Lowercase<T>;
+export const toUpperCase = <T extends string>(string: T): Uppercase<T> => string.toUpperCase() as Uppercase<T>;
