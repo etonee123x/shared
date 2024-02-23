@@ -4,7 +4,6 @@
   "type": "module",
   "description": "Shared types and utils for binding my projects together.",
   "scripts": {
-    "build": "tsc --build",
     "lint": "eslint . --fix",
     "typecheck": "tsc --noEmit"
   },
