@@ -1,4 +1,4 @@
-import { type Falsy, type FunctionType, type Nil, type NotEmptyArray, type ObjectType, type Primitive } from '@/types';
+import { type Falsy, type FunctionType, type Nil, type NotEmptyArray, type ObjectType, type Primitive } from '../types';
 
 export const envVarToBoolean = (envVar: unknown): boolean => ['true', 'TRUE'].includes(String(envVar));
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export * from '@/types/modules';
+export * from './modules';
 
 export type Id = (string | number) & { readonly Id: unique symbol };
 

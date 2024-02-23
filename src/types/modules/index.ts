@@ -1,2 +1,2 @@
-export * from '@/types/modules/folderData';
-export * from '@/types/modules/error';
+export * from './folderData';
+export * from './error';

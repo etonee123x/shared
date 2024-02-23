@@ -1,6 +1,6 @@
 import type { ICommonTagsResult, IFormat } from 'music-metadata';
 
-import { isString } from '@/utils';
+import { isString } from '../../utils';
 
 export type Metadata = {
   bitrate: IFormat['bitrate'];
