@@ -25,6 +25,9 @@ export const isObject = <T>(argument: T | object): argument is object => typeof 
 export const isRealObject = <T>(argument: T | Record<string, unknown>): argument is Record<string, unknown> =>
   Boolean(argument && isObject(argument) && !isArray(argument));
 
+export const isNotEmptyObject = <T>(argument: T | Record<string, unknown>): argument is Record<string, unknown> =>
+  isRealObject(argument) && isNotEmptyArray(Object.values(argument));
+
 export const isPrimitive = <T>(argument: T | Primitive): argument is Primitive =>
   [isNil, isBoolean, isNumber, isBigint, isString, isSymbol].some((func) => func(argument));
 
