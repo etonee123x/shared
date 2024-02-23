@@ -1,2 +1,2 @@
-# Types
-Types for binding together my projects.
+# Shared
+Shared types and utils for binding my projects together.
