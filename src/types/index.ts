@@ -4,6 +4,10 @@ export * from './modules';
 
 export type Id = (string | number) & { readonly Id: unique symbol };
 
+export interface WithId {
+  id: Id;
+}
+
 export const toId = (id: Omit<Id, 'Id'>): Id => id as Id;
 
 export type NotEmptyArray<T> = [T, ...Array<T>];
