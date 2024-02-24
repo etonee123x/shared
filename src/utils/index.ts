@@ -82,7 +82,7 @@ export const propFn =
 
 export const checkExhaustive = (value: never) => console.log('Добавьте обработчик для:', value);
 
-export const toSpliced = <T1, T2>(
+export const arrayToSpliced = <T1, T2>(
   array: Array<T1>,
   start: number,
   deleteCount: number,
