@@ -1,9 +1,7 @@
-import { type WithId } from '../';
+import { type WithDatabaseFields } from '../';
 
 export interface PostData {
   text: string;
 }
 
-export interface Post extends WithId, PostData {
-  createdAt: string;
-}
+export interface Post extends PostData, WithDatabaseFields {}
