@@ -39,19 +39,7 @@ export const isTruthy = <T>(argument: T): argument is Exclude<T, Falsy> => Boole
 export const toLowerCase = <T extends string>(_string: T): Lowercase<T> => _string.toLowerCase() as Lowercase<T>;
 export const toUpperCase = <T extends string>(_string: T): Uppercase<T> => _string.toUpperCase() as Uppercase<T>;
 
-export const parse = <T>(argument: string): T => JSON.parse(argument) as T;
-
-export const areIdsEqual = (first: unknown, second: unknown): boolean => {
-  if (typeof first !== typeof second) {
-    return false;
-  }
-
-  if (isObjectType(first) && isObjectType(second)) {
-    return 'id' in first && 'id' in second && first.id === second.id;
-  }
-
-  return first === second;
-};
+export const jsonParse = <T>(argument: string): T => JSON.parse(argument) as T;
 
 export const omit = <TObject extends object, Key extends keyof TObject>(
   object: TObject,

@@ -10,6 +10,8 @@ export interface WithId {
 
 export const toId = (id: Omit<Id, 'Id'>): Id => id as Id;
 
+export const areIdsEqual = (id1: Id, id2: Id) => String(id1) === String(id2);
+
 export type NotEmptyArray<T> = [T, ...Array<T>];
 
 export type Nil = null | undefined;
