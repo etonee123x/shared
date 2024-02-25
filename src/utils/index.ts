@@ -36,8 +36,8 @@ export const isObjectType = <T>(argument: T | ObjectType): argument is ObjectTyp
 
 export const isTruthy = <T>(argument: T): argument is Exclude<T, Falsy> => Boolean(argument);
 
-export const toLowerCase = <T extends string>(_string: T): Lowercase<T> => _string.toLowerCase() as Lowercase<T>;
-export const toUpperCase = <T extends string>(_string: T): Uppercase<T> => _string.toUpperCase() as Uppercase<T>;
+export const stringToLowerCase = <T extends string>(_string: T): Lowercase<T> => _string.toLowerCase() as Lowercase<T>;
+export const stringToUpperCase = <T extends string>(_string: T): Uppercase<T> => _string.toUpperCase() as Uppercase<T>;
 
 export const jsonParse = <T>(argument: string): T => JSON.parse(argument) as T;
 
