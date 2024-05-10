@@ -2,7 +2,7 @@ import { type WithDatabaseFields } from '../';
 
 export interface PostData {
   text: string;
-  files: Array<File>;
+  filesUrls: Array<string>;
 }
 
 export interface Post extends PostData, WithDatabaseFields {}
