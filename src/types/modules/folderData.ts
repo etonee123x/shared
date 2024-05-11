@@ -1,7 +1,5 @@
 import type { ICommonTagsResult, IFormat } from 'music-metadata';
 
-import { isString } from '../../utils';
-
 export type Metadata = {
   bitrate: IFormat['bitrate'];
   duration: NonNullable<IFormat['duration']>;
@@ -81,16 +79,16 @@ export class ItemAudio extends ItemFile<EXT_AUDIO> {
   }
 }
 
-export enum EXT_PICTURE {
+export enum EXT_IMAGE {
   JPG = '.jpg',
   JPEG = '.jpeg',
   PNG = '.png',
 }
 
-export interface ItemPicture extends ItemFile<EXT_PICTURE> {}
+export interface ItemImage extends ItemFile<EXT_IMAGE> {}
 
-export class ItemPicture extends ItemFile<EXT_PICTURE> {
-  constructor({ ext, ...baseItem }: ItemPicture) {
+export class ItemImage extends ItemFile<EXT_IMAGE> {
+  constructor({ ext, ...baseItem }: ItemImage) {
     super(baseItem, ext);
   }
 }
@@ -109,16 +107,10 @@ export interface FolderData {
   navigationItems: Array<NavigationItem>;
 }
 
-export const extIsAudio = (arg: unknown): arg is EXT_AUDIO =>
-  isString(arg) && Object.values<string>(EXT_AUDIO).includes(arg);
-
-export const extIsPicture = (arg: unknown): arg is EXT_PICTURE =>
-  isString(arg) && Object.values<string>(EXT_PICTURE).includes(arg);
-
 export const isExtAudio = (ext: string): ext is EXT_AUDIO => Object.values<string>(EXT_AUDIO).includes(ext);
-export const isExtPicture = (ext: string): ext is EXT_PICTURE => Object.values<string>(EXT_PICTURE).includes(ext);
+export const isExtImage = (ext: string): ext is EXT_IMAGE => Object.values<string>(EXT_IMAGE).includes(ext);
 
 export const isItemFolder = (item: Item): item is ItemFolder => item.type === ITEM_TYPE.FOLDER;
 export const isItemFile = (item: Item): item is ItemFile => item.type === ITEM_TYPE.FILE;
 export const isItemAudio = (item: Item): item is ItemAudio => isItemFile(item) && isExtAudio(item.ext);
-export const isItemPicture = (item: Item): item is ItemPicture => isItemFile(item) && isExtPicture(item.ext);
+export const isItemImage = (item: Item): item is ItemImage => isItemFile(item) && isExtImage(item.ext);
