@@ -99,3 +99,5 @@ export const arrayToSpliced = <T1, T2>(
 
     return acc;
   }, []);
+
+export const isKindaTrue = (arg: unknown) => String(arg).toLowerCase() === 'true'; // TRUE True tRuE TRue
