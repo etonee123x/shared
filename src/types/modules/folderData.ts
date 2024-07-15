@@ -95,6 +95,8 @@ export class ItemImage extends ItemFile<EXT_IMAGE> {
 
 export enum EXT_VIDEO {
   MP4 = '.mp4',
+  // TODO: надо починить весь механизм, а не добавлять костыли
+  MP4_UPPERCASE = '.MP4',
   WEBM = '.webm',
 }
 
