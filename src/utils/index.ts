@@ -1,4 +1,4 @@
-import { type Falsy, type FunctionType, type Nil, type NotEmptyArray, type ObjectType, type Primitive } from '../types';
+import { type FunctionType, type Nil, type NotEmptyArray, type ObjectType, type Primitive } from '../types';
 
 export const envVarToBoolean = (envVar: unknown): boolean => ['true', 'TRUE'].includes(String(envVar));
 
@@ -33,8 +33,6 @@ export const isPrimitive = <T>(argument: T | Primitive): argument is Primitive =
 
 export const isObjectType = <T>(argument: T | ObjectType): argument is ObjectType =>
   [isRealObject, isArray, isFunction].some((func) => func(argument));
-
-export const isTruthy = <T>(argument: T): argument is Exclude<T, Falsy> => Boolean(argument);
 
 export const stringToLowerCase = <T extends string>(_string: T): Lowercase<T> => _string.toLowerCase() as Lowercase<T>;
 export const stringToUpperCase = <T extends string>(_string: T): Uppercase<T> => _string.toUpperCase() as Uppercase<T>;
