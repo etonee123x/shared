@@ -1,4 +1,4 @@
-import type { Primitive } from '@shared/types';
+import type { Primitive } from '../types';
 
 import { isNil } from './isNil';
 import { isBoolean } from './isBoolean';

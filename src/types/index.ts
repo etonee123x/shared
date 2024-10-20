@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { isNotNil } from '../utils';
+import { isNotNil } from '../utils/isNotNil';
 
 export * from './modules';
 
