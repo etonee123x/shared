@@ -9,9 +9,11 @@
   "author": "etonee123x",
   "license": "ISC",
   "dependencies": {
+    "deep-equal": "^2.2.3",
     "music-metadata": "^7.14.0"
   },
   "devDependencies": {
+    "@types/deep-equal": "^1.0.4",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",

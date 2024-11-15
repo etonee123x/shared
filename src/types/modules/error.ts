@@ -30,5 +30,7 @@ export const createErrorServer = (data: CustomError['data']) =>
 export const isCustomError = (arg: unknown): arg is CustomError => isRealObject(arg) && arg.__isCustomError === true;
 
 export const isCustomErrorClient = (arg: CustomError) => arg.statusCode >= 400 && arg.statusCode < 500;
+
 export const isCustomErrorServer = (arg: CustomError) => arg.statusCode >= 500 && arg.statusCode < 600;
+
 export const isCustomErrorUnknown = (arg: CustomError) => arg.statusCode === CUSTOM_ERROR_UNKNOWN_STATUS_CODE;
