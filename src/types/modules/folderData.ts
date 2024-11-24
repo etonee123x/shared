@@ -63,6 +63,7 @@ export class ItemFile<Ext extends string = string> extends ItemBase {
 
 export enum EXT_AUDIO {
   MP3 = '.mp3',
+  OGG = '.ogg',
   WAV = '.wav',
 }
 
