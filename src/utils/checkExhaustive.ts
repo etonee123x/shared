@@ -1,1 +1,1 @@
-export const checkExhaustive = (value: never) => console.log('Добавьте обработчик для:', value);
+export const checkExhaustive = (value: never) => new Error(`Добавьте обработчик для: ${value}`);

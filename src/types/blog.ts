@@ -1,4 +1,4 @@
-import { type WithDatabaseFields } from '../';
+import { type WithDatabaseFields } from './database';
 
 export interface PostData {
   text: string;

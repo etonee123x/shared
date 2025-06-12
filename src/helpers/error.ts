@@ -1,5 +1,5 @@
-import { isRealObject } from '../../utils/isRealObject';
-import { isNil } from '../../utils/isNil';
+import { isRealObject } from '../utils/isRealObject';
+import { isNil } from '../utils/isNil';
 
 interface CustomError {
   data: unknown;
