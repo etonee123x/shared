@@ -13,7 +13,7 @@
     "./utils/*": "./dist/utils/*.js",
     "./helpers/*": "./dist/helpers/*.js"
   },
-  "files": ["dist/utils", "dist/helpers"],
+  "files": ["dist"],
   "type": "module",
   "author": "etonee123x",
   "license": "ISC",
