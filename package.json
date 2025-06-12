@@ -11,10 +11,8 @@
   },
   "exports": {
     "./utils/*": "./dist/utils/*.js",
-    "./helpers/*": "./dist/helpers/*.ts",
-    "./types/*": "./dist/types/*.d.ts"
+    "./helpers/*": "./dist/helpers/*.js"
   },
-  "files": ["dist"],
   "type": "module",
   "author": "etonee123x",
   "license": "ISC",
