@@ -11,7 +11,8 @@
   },
   "exports": {
     "./utils/*": "./dist/utils/*.js",
-    "./helpers/*": "./dist/helpers/*.js"
+    "./helpers/*": "./dist/helpers/*.js",
+    "./types/*": "./dist/types/*"
   },
   "files": ["dist"],
   "type": "module",
