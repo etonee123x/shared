@@ -12,7 +12,8 @@
   "exports": {
     "./utils/*": "./dist/utils/*.js",
     "./helpers/*": "./dist/helpers/*.js",
-    "./types/*": "./dist/types/*.d.ts"
+    "./types/*": "./dist/types/*.d.ts",
+    "./types": "./dist/types/index.d.ts"
   },
   "files": ["dist"],
   "type": "module",
