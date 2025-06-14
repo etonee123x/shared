@@ -72,6 +72,7 @@ export default [
     rules: {
       '@typescript-eslint/ban-ts-comment': 'error',
       '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'with-single-extends' }],
+      '@typescript-eslint/no-unsafe-declaration-merging': 'off',
     },
   },
   {

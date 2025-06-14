@@ -6,8 +6,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "build": "tsc",
-    "prepare": "npm run build"
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run build:cjs && npm run build:esm",
+    "prepare": "npm run build",
+    "generateExports": "node scripts/generateExports.js"
   },
   "exports": {
     "./utils/*": "./dist/utils/*.js",

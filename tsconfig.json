@@ -2,25 +2,14 @@
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
-    "module": "ESNext",
     "declaration": true,
-    "declarationDir": "dist",
-    "outDir": "dist",
     "strict": true,
-    "jsx": "preserve",
-    "rootDir": "src",
-    "sourceMap": true,
     "moduleResolution": "Node",
     "isolatedModules": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "@shared/*": [
-        "src/*"
-      ],
-    }
   },
   "include": [
     "src/**/*.ts",
