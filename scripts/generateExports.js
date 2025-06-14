@@ -29,9 +29,14 @@ const files = await getExportPaths(esmRoot);
 
 const exports = {
   '.': {
-    import: './dist/esm/index.js',
-    require: './dist/cjs/index.js',
-    types: './dist/esm/index.d.ts',
+    import: {
+      types: './dist/esm/index.d.ts',
+      default: './dist/esm/index.js',
+    },
+    require: {
+      types: './dist/esm/index.d.ts',
+      default: './dist/cjs/index.js',
+    },
   },
 };
 
@@ -39,10 +44,16 @@ for (const file of files) {
   if (file === 'index') {
     continue;
   }
+
   exports[`./${file}`] = {
-    import: `./dist/esm/${file}.js`,
-    require: `./dist/cjs/${file}.js`,
-    types: `./dist/esm/${file}.d.ts`,
+    import: {
+      default: `./dist/esm/${file}.js`,
+      types: `./dist/esm/${file}.d.ts`,
+    },
+    require: {
+      default: `./dist/cjs/${file}.js`,
+      types: `./dist/esm/${file}.d.ts`,
+    },
   };
 }
 
