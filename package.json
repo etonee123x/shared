@@ -93,7 +93,7 @@
         "types": "./dist/esm/types/id.d.ts"
       }
     },
-    "./types/index": {
+    "./types": {
       "import": {
         "default": "./dist/esm/types/index.js",
         "types": "./dist/esm/types/index.d.ts"

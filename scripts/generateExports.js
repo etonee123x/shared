@@ -45,7 +45,9 @@ for (const file of files) {
     continue;
   }
 
-  exports[`./${file}`] = {
+  const exportPath = file.endsWith('/index') ? `./${file.slice(0, -'/index'.length)}` : `./${file}`;
+
+  exports[exportPath] = {
     import: {
       default: `./dist/esm/${file}.js`,
       types: `./dist/esm/${file}.d.ts`,
