@@ -8,17 +8,175 @@
     "typecheck": "tsc --noEmit",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "build": "npm run build:cjs && npm run build:esm",
+    "build": "npm run build:cjs && npm run build:esm && npm run generateExports",
     "prepare": "npm run build",
     "generateExports": "node scripts/generateExports.js"
   },
   "exports": {
-    "./utils/*": "./dist/utils/*.js",
-    "./helpers/*": "./dist/helpers/*.js",
-    "./types/*": "./dist/types/*.d.ts",
-    "./types": "./dist/types/index.d.ts"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.d.ts"
+    },
+    "./helpers/error": {
+      "import": "./dist/esm/helpers/error.js",
+      "require": "./dist/cjs/helpers/error.js",
+      "types": "./dist/esm/helpers/error.d.ts"
+    },
+    "./helpers/folderData": {
+      "import": "./dist/esm/helpers/folderData.js",
+      "require": "./dist/cjs/helpers/folderData.js",
+      "types": "./dist/esm/helpers/folderData.d.ts"
+    },
+    "./helpers/id": {
+      "import": "./dist/esm/helpers/id.js",
+      "require": "./dist/cjs/helpers/id.js",
+      "types": "./dist/esm/helpers/id.d.ts"
+    },
+    "./types/blog": {
+      "import": "./dist/esm/types/blog.js",
+      "require": "./dist/cjs/types/blog.js",
+      "types": "./dist/esm/types/blog.d.ts"
+    },
+    "./types/database": {
+      "import": "./dist/esm/types/database.js",
+      "require": "./dist/cjs/types/database.js",
+      "types": "./dist/esm/types/database.d.ts"
+    },
+    "./types/folderData": {
+      "import": "./dist/esm/types/folderData.js",
+      "require": "./dist/cjs/types/folderData.js",
+      "types": "./dist/esm/types/folderData.d.ts"
+    },
+    "./types/id": {
+      "import": "./dist/esm/types/id.js",
+      "require": "./dist/cjs/types/id.js",
+      "types": "./dist/esm/types/id.d.ts"
+    },
+    "./types/index": {
+      "import": "./dist/esm/types/index.js",
+      "require": "./dist/cjs/types/index.js",
+      "types": "./dist/esm/types/index.d.ts"
+    },
+    "./utils/checkExhaustive": {
+      "import": "./dist/esm/utils/checkExhaustive.js",
+      "require": "./dist/cjs/utils/checkExhaustive.js",
+      "types": "./dist/esm/utils/checkExhaustive.d.ts"
+    },
+    "./utils/envVarToBoolean": {
+      "import": "./dist/esm/utils/envVarToBoolean.js",
+      "require": "./dist/cjs/utils/envVarToBoolean.js",
+      "types": "./dist/esm/utils/envVarToBoolean.d.ts"
+    },
+    "./utils/isArray": {
+      "import": "./dist/esm/utils/isArray.js",
+      "require": "./dist/cjs/utils/isArray.js",
+      "types": "./dist/esm/utils/isArray.d.ts"
+    },
+    "./utils/isBigint": {
+      "import": "./dist/esm/utils/isBigint.js",
+      "require": "./dist/cjs/utils/isBigint.js",
+      "types": "./dist/esm/utils/isBigint.d.ts"
+    },
+    "./utils/isBoolean": {
+      "import": "./dist/esm/utils/isBoolean.js",
+      "require": "./dist/cjs/utils/isBoolean.js",
+      "types": "./dist/esm/utils/isBoolean.d.ts"
+    },
+    "./utils/isEqual": {
+      "import": "./dist/esm/utils/isEqual.js",
+      "require": "./dist/cjs/utils/isEqual.js",
+      "types": "./dist/esm/utils/isEqual.d.ts"
+    },
+    "./utils/isFunction": {
+      "import": "./dist/esm/utils/isFunction.js",
+      "require": "./dist/cjs/utils/isFunction.js",
+      "types": "./dist/esm/utils/isFunction.d.ts"
+    },
+    "./utils/isNil": {
+      "import": "./dist/esm/utils/isNil.js",
+      "require": "./dist/cjs/utils/isNil.js",
+      "types": "./dist/esm/utils/isNil.d.ts"
+    },
+    "./utils/isNotEmptyArray": {
+      "import": "./dist/esm/utils/isNotEmptyArray.js",
+      "require": "./dist/cjs/utils/isNotEmptyArray.js",
+      "types": "./dist/esm/utils/isNotEmptyArray.d.ts"
+    },
+    "./utils/isNotEmptyObject": {
+      "import": "./dist/esm/utils/isNotEmptyObject.js",
+      "require": "./dist/cjs/utils/isNotEmptyObject.js",
+      "types": "./dist/esm/utils/isNotEmptyObject.d.ts"
+    },
+    "./utils/isNotNil": {
+      "import": "./dist/esm/utils/isNotNil.js",
+      "require": "./dist/cjs/utils/isNotNil.js",
+      "types": "./dist/esm/utils/isNotNil.d.ts"
+    },
+    "./utils/isNumber": {
+      "import": "./dist/esm/utils/isNumber.js",
+      "require": "./dist/cjs/utils/isNumber.js",
+      "types": "./dist/esm/utils/isNumber.d.ts"
+    },
+    "./utils/isObject": {
+      "import": "./dist/esm/utils/isObject.js",
+      "require": "./dist/cjs/utils/isObject.js",
+      "types": "./dist/esm/utils/isObject.d.ts"
+    },
+    "./utils/isObjectType": {
+      "import": "./dist/esm/utils/isObjectType.js",
+      "require": "./dist/cjs/utils/isObjectType.js",
+      "types": "./dist/esm/utils/isObjectType.d.ts"
+    },
+    "./utils/isPrimitive": {
+      "import": "./dist/esm/utils/isPrimitive.js",
+      "require": "./dist/cjs/utils/isPrimitive.js",
+      "types": "./dist/esm/utils/isPrimitive.d.ts"
+    },
+    "./utils/isRealObject": {
+      "import": "./dist/esm/utils/isRealObject.js",
+      "require": "./dist/cjs/utils/isRealObject.js",
+      "types": "./dist/esm/utils/isRealObject.d.ts"
+    },
+    "./utils/isString": {
+      "import": "./dist/esm/utils/isString.js",
+      "require": "./dist/cjs/utils/isString.js",
+      "types": "./dist/esm/utils/isString.d.ts"
+    },
+    "./utils/isSymbol": {
+      "import": "./dist/esm/utils/isSymbol.js",
+      "require": "./dist/cjs/utils/isSymbol.js",
+      "types": "./dist/esm/utils/isSymbol.d.ts"
+    },
+    "./utils/jsonParse": {
+      "import": "./dist/esm/utils/jsonParse.js",
+      "require": "./dist/cjs/utils/jsonParse.js",
+      "types": "./dist/esm/utils/jsonParse.d.ts"
+    },
+    "./utils/omit": {
+      "import": "./dist/esm/utils/omit.js",
+      "require": "./dist/cjs/utils/omit.js",
+      "types": "./dist/esm/utils/omit.d.ts"
+    },
+    "./utils/pick": {
+      "import": "./dist/esm/utils/pick.js",
+      "require": "./dist/cjs/utils/pick.js",
+      "types": "./dist/esm/utils/pick.d.ts"
+    },
+    "./utils/property": {
+      "import": "./dist/esm/utils/property.js",
+      "require": "./dist/cjs/utils/property.js",
+      "types": "./dist/esm/utils/property.d.ts"
+    },
+    "./utils/throwError": {
+      "import": "./dist/esm/utils/throwError.js",
+      "require": "./dist/cjs/utils/throwError.js",
+      "types": "./dist/esm/utils/throwError.d.ts"
+    }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "author": "etonee123x",
   "license": "ISC",
