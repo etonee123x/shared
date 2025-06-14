@@ -1,6 +1,11 @@
 import { isNotNil } from '../utils/isNotNil';
 import type { Nil } from '../types';
-import type { Id } from '../types/id';
+
+export type Id = (string | number) & { readonly Id: unique symbol };
+
+export interface WithId {
+  id: Id;
+}
 
 export const toId = (id: Omit<Id, 'Id'>): Id => id as Id;
 

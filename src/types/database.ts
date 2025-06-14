@@ -1,4 +1,4 @@
-import type { WithId } from '../types/id';
+import type { WithId } from '../helpers/id';
 
 export interface WithCreatedAt {
   createdAt: number;

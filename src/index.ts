@@ -8,10 +8,6 @@ export * from './types/blog';
 
 export * from './types/database';
 
-export * from './types/folderData';
-
-export * from './types/id';
-
 export * from './types/index';
 
 export * from './utils/checkExhaustive';
