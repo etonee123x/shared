@@ -36,8 +36,6 @@ export * from './utils/isNotEmptyObject';
 
 export * from './utils/isNotNil';
 
-export * from './utils/isNotNil';
-
 export * from './utils/isNumber';
 
 export * from './utils/isObject';
