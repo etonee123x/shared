@@ -26,8 +26,6 @@ export * from './utils/isFunction';
 
 export * from './utils/isNil';
 
-export * from './utils/isNotEmptyArray';
-
 export * from './utils/isNotEmptyObject';
 
 export * from './utils/isNotNil';
