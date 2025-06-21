@@ -73,26 +73,6 @@
         "types": "./dist/esm/types/database.d.ts"
       }
     },
-    "./types/folderData": {
-      "import": {
-        "default": "./dist/esm/types/folderData.js",
-        "types": "./dist/esm/types/folderData.d.ts"
-      },
-      "require": {
-        "default": "./dist/cjs/types/folderData.js",
-        "types": "./dist/esm/types/folderData.d.ts"
-      }
-    },
-    "./types/id": {
-      "import": {
-        "default": "./dist/esm/types/id.js",
-        "types": "./dist/esm/types/id.d.ts"
-      },
-      "require": {
-        "default": "./dist/cjs/types/id.js",
-        "types": "./dist/esm/types/id.d.ts"
-      }
-    },
     "./types": {
       "import": {
         "default": "./dist/esm/types/index.js",
@@ -181,16 +161,6 @@
       "require": {
         "default": "./dist/cjs/utils/isNil.js",
         "types": "./dist/esm/utils/isNil.d.ts"
-      }
-    },
-    "./utils/isNotEmptyArray": {
-      "import": {
-        "default": "./dist/esm/utils/isNotEmptyArray.js",
-        "types": "./dist/esm/utils/isNotEmptyArray.d.ts"
-      },
-      "require": {
-        "default": "./dist/cjs/utils/isNotEmptyArray.js",
-        "types": "./dist/esm/utils/isNotEmptyArray.d.ts"
       }
     },
     "./utils/isNotEmptyObject": {
