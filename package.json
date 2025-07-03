@@ -12,7 +12,6 @@
     "prepare": "npm run build",
     "generateExports": "node scripts/generateExports.mjs"
   },
-  "type": "module",
   "exports": {
     ".": {
       "import": {
