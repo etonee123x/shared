@@ -10,7 +10,7 @@
     "build:esm": "tsc -p tsconfig.esm.json",
     "build": "npm run build:cjs && npm run build:esm && npm run generateExports",
     "prepare": "npm run build",
-    "generateExports": "node scripts/generateExports.js"
+    "generateExports": "node scripts/generateExports.mjs"
   },
   "exports": {
     ".": {
