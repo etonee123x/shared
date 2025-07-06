@@ -12,6 +12,8 @@
     "prepare": "npm run build",
     "generateExports": "node scripts/generateExports.mjs"
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "import": {
