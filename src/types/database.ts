@@ -6,8 +6,8 @@ export interface WithTimestamps {
 }
 
 export interface WithSince {
-  sinceCreated: string;
-  sinceUpdated: string;
+  sinceCreated: number;
+  sinceUpdated: number;
 }
 
 export interface WithDatabaseMeta extends WithMeta<WithId & WithTimestamps & WithSince> {}
