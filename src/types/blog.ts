@@ -1,8 +1,4 @@
-import { type WithDatabaseFields } from './database';
-
-export interface PostData {
+export interface Post {
   text: string;
   filesUrls: Array<string>;
 }
-
-export interface Post extends PostData, WithDatabaseFields {}

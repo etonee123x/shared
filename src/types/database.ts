@@ -1,20 +1,22 @@
 import type { WithId } from '../helpers/id';
 
-export interface WithCreatedAt {
+export interface WithTimestamps {
   createdAt: number;
-}
-
-export interface WithUpdatedAt {
   updatedAt: number;
 }
 
-export interface WithDatabaseFields extends WithId, WithCreatedAt, WithUpdatedAt {}
+export interface WithSince {
+  sinceCreated: string;
+  sinceUpdated: string;
+}
 
-export type ForPost<T extends WithDatabaseFields> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
+export interface WithDatabaseMeta extends WithMeta<WithId & WithTimestamps & WithSince> {}
 
-export type ForPut<T extends WithDatabaseFields> = Omit<T, 'updatedAt'>;
+export type ForPost<T extends object> = T;
 
-export type ForPatch<T extends WithDatabaseFields> = Partial<Omit<T, 'updatedAt'>> & WithId & WithCreatedAt;
+export type ForPut<T extends object> = T & WithDatabaseMeta;
+
+export type ForPatch<T extends object> = Partial<T & WithDatabaseMeta>;
 
 export interface PaginationMeta {
   perPage: number;
@@ -26,5 +28,5 @@ export interface WithIsEnd {
 }
 
 export interface WithMeta<Meta> {
-  meta: Meta;
+  _meta: Meta;
 }
