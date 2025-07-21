@@ -10,7 +10,7 @@ export interface WithSince {
   sinceUpdated: number;
 }
 
-export interface WithDatabaseMeta extends WithMeta<WithId & WithTimestamps & WithSince> {}
+export interface WithDatabaseMeta extends WithMeta<WithId & WithTimestamps> {}
 
 export type ForPost<T extends object> = T;
 
