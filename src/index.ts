@@ -60,4 +60,6 @@ export * from './utils/pick';
 
 export * from './utils/property';
 
+export * from './utils/objectGet';
+
 export * from './utils/throwError';
