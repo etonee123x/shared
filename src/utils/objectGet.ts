@@ -1,4 +1,4 @@
-import { isNil } from '@etonee123x/shared/utils/isNil';
+import { isNil } from './isNil';
 
 export const objectGet = (object: unknown, path: string | number | Array<string | number>): unknown | undefined => {
   if (isNil(object)) {

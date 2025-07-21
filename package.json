@@ -265,6 +265,16 @@
         "types": "./dist/esm/utils/jsonParse.d.ts"
       }
     },
+    "./utils/objectGet": {
+      "import": {
+        "default": "./dist/esm/utils/objectGet.js",
+        "types": "./dist/esm/utils/objectGet.d.ts"
+      },
+      "require": {
+        "default": "./dist/cjs/utils/objectGet.js",
+        "types": "./dist/esm/utils/objectGet.d.ts"
+      }
+    },
     "./utils/omit": {
       "import": {
         "default": "./dist/esm/utils/omit.js",
