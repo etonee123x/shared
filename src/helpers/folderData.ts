@@ -34,8 +34,7 @@ export interface ItemBase {
   name: string;
   url: string;
   src: string;
-  birthtime: string;
-
+  birthtimeMs: number;
   numberOfThisExt?: number;
 }
 
@@ -60,15 +59,15 @@ export class ItemBase {
   name: string;
   url: string;
   src: string;
-  birthtime: string;
+  birthtimeMs: number;
 
   numberOfThisExt?: number;
 
-  constructor({ name, url, src, birthtime, numberOfThisExt }: ItemBase) {
+  constructor({ name, url, src, birthtimeMs, numberOfThisExt }: ItemBase) {
     this.name = name;
     this.url = url;
     this.src = src;
-    this.birthtime = birthtime;
+    this.birthtimeMs = birthtimeMs;
 
     this.numberOfThisExt = numberOfThisExt;
   }
