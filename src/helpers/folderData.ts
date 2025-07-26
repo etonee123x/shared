@@ -1,4 +1,5 @@
 import type { ICommonTagsResult, IFormat } from 'music-metadata';
+import { WithMeta, WithTimestamps } from 'src/types/database';
 
 export enum ITEM_TYPE {
   FOLDER = 'folder',
@@ -24,17 +25,14 @@ export enum EXT_VIDEO {
   WEBM = '.webm',
 }
 
-export type Metadata = {
-  bitrate: IFormat['bitrate'];
-  duration: NonNullable<IFormat['duration']>;
-  artists: NonNullable<ICommonTagsResult['artists']>;
-} & Pick<ICommonTagsResult, 'album' | 'bpm' | 'year'>;
+export interface MusicMetadata
+  extends Pick<ICommonTagsResult, 'album' | 'bpm' | 'year' | 'artists'>,
+    Pick<IFormat, 'bitrate' | 'duration'> {}
 
-export interface ItemBase {
+export interface ItemBase extends WithMeta<WithTimestamps> {
   name: string;
   url: string;
   src: string;
-  birthtimeMs: number;
   numberOfThisExt?: number;
 }
 
@@ -48,7 +46,7 @@ export interface ItemFile<Ext extends string = string> extends ItemBase {
 }
 
 export interface ItemAudio extends ItemFile<EXT_AUDIO> {
-  metadata: Metadata;
+  musicMetadata: MusicMetadata;
 }
 
 export interface ItemImage extends ItemFile<EXT_IMAGE> {}
@@ -59,15 +57,14 @@ export class ItemBase {
   name: string;
   url: string;
   src: string;
-  birthtimeMs: number;
 
   numberOfThisExt?: number;
 
-  constructor({ name, url, src, birthtimeMs, numberOfThisExt }: ItemBase) {
+  constructor({ name, url, src, numberOfThisExt, _meta }: ItemBase) {
     this.name = name;
     this.url = url;
     this.src = src;
-    this.birthtimeMs = birthtimeMs;
+    this._meta = _meta;
 
     this.numberOfThisExt = numberOfThisExt;
   }
@@ -94,11 +91,11 @@ export class ItemVideo extends ItemFile<EXT_VIDEO> {
 }
 
 export class ItemAudio extends ItemFile<EXT_AUDIO> {
-  metadata: Metadata;
-
-  constructor({ ext, ...baseItem }: Omit<ItemAudio, 'metadata'>, metadata: Metadata) {
+  constructor(
+    { ext, ...baseItem }: Omit<ItemAudio, 'metadata'>,
+    public musicMetadata: MusicMetadata,
+  ) {
     super(baseItem, ext);
-    this.metadata = metadata;
   }
 }
 

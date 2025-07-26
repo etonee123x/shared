@@ -5,7 +5,7 @@ export interface WithTimestamps {
   updatedAt?: number;
 }
 
-export interface WithSince {
+export interface WithSinceTimestamps {
   sinceCreated: number;
   sinceUpdated?: number;
 }
