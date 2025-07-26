@@ -57,6 +57,7 @@ export class ItemBase {
   name: string;
   url: string;
   src: string;
+  _meta: WithTimestamps;
 
   numberOfThisExt?: number;
 
