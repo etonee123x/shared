@@ -2,12 +2,12 @@ import type { WithId } from '../helpers/id';
 
 export interface WithTimestamps {
   createdAt: number;
-  updatedAt: number;
+  updatedAt?: number;
 }
 
 export interface WithSince {
   sinceCreated: number;
-  sinceUpdated: number;
+  sinceUpdated?: number;
 }
 
 export interface WithDatabaseMeta extends WithMeta<WithId & WithTimestamps> {}
