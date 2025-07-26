@@ -12,11 +12,11 @@ export interface WithSinceTimestamps {
 
 export interface WithDatabaseMeta extends WithMeta<WithId & WithTimestamps> {}
 
-export type ForPost<T extends object> = T;
+export type ForPost<T extends WithDatabaseMeta> = Omit<T, '_meta'>;
 
-export type ForPut<T extends object> = T & WithDatabaseMeta;
+export type ForPut<T extends WithDatabaseMeta> = T;
 
-export type ForPatch<T extends object> = Partial<T & WithDatabaseMeta>;
+export type ForPatch<T extends WithDatabaseMeta> = Partial<T>;
 
 export interface PaginationMeta {
   perPage: number;
