@@ -93,7 +93,7 @@ export class ItemVideo extends ItemFile<EXT_VIDEO> {
 
 export class ItemAudio extends ItemFile<EXT_AUDIO> {
   constructor(
-    { ext, ...baseItem }: Omit<ItemAudio, 'metadata'>,
+    { ext, ...baseItem }: Omit<ItemAudio, 'musicMetadata'>,
     public musicMetadata: MusicMetadata,
   ) {
     super(baseItem, ext);
