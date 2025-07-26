@@ -1,5 +1,5 @@
 import type { ICommonTagsResult, IFormat } from 'music-metadata';
-import { WithMeta, WithTimestamps } from 'src/types/database';
+import { WithMeta, WithTimestamps } from '../types/database';
 
 export enum ITEM_TYPE {
   FOLDER = 'folder',
