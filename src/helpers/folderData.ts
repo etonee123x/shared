@@ -33,7 +33,6 @@ export interface ItemBase extends WithMeta<WithTimestamps> {
   name: string;
   url: string;
   src: string;
-  numberOfThisExt?: number;
 }
 
 export interface ItemFolder extends ItemBase {
@@ -59,15 +58,11 @@ export class ItemBase {
   src: string;
   _meta: WithTimestamps;
 
-  numberOfThisExt?: number;
-
-  constructor({ name, url, src, numberOfThisExt, _meta }: ItemBase) {
+  constructor({ name, url, src, _meta }: ItemBase) {
     this.name = name;
     this.url = url;
     this.src = src;
     this._meta = _meta;
-
-    this.numberOfThisExt = numberOfThisExt;
   }
 }
 
