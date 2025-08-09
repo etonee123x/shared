@@ -1,35 +1,16 @@
 import type { ICommonTagsResult, IFormat } from 'music-metadata';
 import { WithMeta, WithTimestamps } from '../types/database';
 
-export enum ITEM_TYPE {
-  FOLDER = 'folder',
-  FILE = 'file',
-}
+export const ITEM_TYPES = {
+  FOLDER: 'FOLDER',
+  FILE: 'FILE',
+} as const;
 
-export enum FILE_TYPE {
-  AUDIO = 'audio',
-  IMAGE = 'image',
-  VIDEO = 'video',
-}
-
-export enum EXT_AUDIO {
-  MP3 = '.mp3',
-  OGG = '.ogg',
-  WAV = '.wav',
-}
-
-export enum EXT_IMAGE {
-  JPG = '.jpg',
-  JPEG = '.jpeg',
-  PNG = '.png',
-}
-
-export enum EXT_VIDEO {
-  MP4 = '.mp4',
-  // TODO: надо починить весь механизм, а не добавлять костыли
-  MP4_UPPERCASE = '.MP4',
-  WEBM = '.webm',
-}
+export const FILE_TYPES = {
+  AUDIO: 'AUDIO',
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+} as const;
 
 export interface MusicMetadata
   extends Pick<ICommonTagsResult, 'album' | 'bpm' | 'year' | 'artists'>,
@@ -42,70 +23,22 @@ export interface ItemBase extends WithMeta<WithTimestamps> {
 }
 
 export interface ItemFolder extends ItemBase {
-  type: ITEM_TYPE.FOLDER;
+  itemType: typeof ITEM_TYPES.FOLDER;
 }
 
-export interface ItemFile<Ext extends string = string> extends ItemBase {
-  type: ITEM_TYPE.FILE;
-  ext: Ext;
+export interface ItemFile<FileType extends keyof typeof FILE_TYPES = keyof typeof FILE_TYPES> extends ItemBase {
+  itemType: typeof ITEM_TYPES.FILE;
+  fileType: FileType;
+  ext: string;
 }
 
-export interface ItemAudio extends ItemFile<EXT_AUDIO> {
+export interface ItemAudio extends ItemFile<typeof FILE_TYPES.AUDIO> {
   musicMetadata: MusicMetadata;
 }
 
-export interface ItemImage extends ItemFile<EXT_IMAGE> {}
+export interface ItemImage extends ItemFile<typeof FILE_TYPES.IMAGE> {}
 
-export interface ItemVideo extends ItemFile<EXT_VIDEO> {}
-
-export class ItemBase {
-  name: string;
-  url: string;
-  src: string;
-  _meta: WithTimestamps;
-
-  constructor({ name, url, src, _meta }: ItemBase) {
-    this.name = name;
-    this.url = url;
-    this.src = src;
-    this._meta = _meta;
-  }
-}
-
-export class ItemFolder extends ItemBase {
-  type: ITEM_TYPE.FOLDER = ITEM_TYPE.FOLDER;
-}
-
-export class ItemFile<Ext extends string = string> extends ItemBase {
-  type: ITEM_TYPE.FILE = ITEM_TYPE.FILE;
-  constructor(
-    baseItem: Omit<ItemFile<Ext>, 'ext' | 'type'>,
-    public ext: Ext,
-  ) {
-    super(baseItem);
-  }
-}
-
-export class ItemVideo extends ItemFile<EXT_VIDEO> {
-  constructor({ ext, ...baseItem }: ItemVideo) {
-    super(baseItem, ext);
-  }
-}
-
-export class ItemAudio extends ItemFile<EXT_AUDIO> {
-  constructor(
-    { ext, ...baseItem }: Omit<ItemAudio, 'musicMetadata'>,
-    public musicMetadata: MusicMetadata,
-  ) {
-    super(baseItem, ext);
-  }
-}
-
-export class ItemImage extends ItemFile<EXT_IMAGE> {
-  constructor({ ext, ...baseItem }: ItemImage) {
-    super(baseItem, ext);
-  }
-}
+export interface ItemVideo extends ItemFile<typeof FILE_TYPES.VIDEO> {}
 
 export type Item = ItemFile | ItemFolder;
 
@@ -121,34 +54,24 @@ export interface FolderData {
   navigationItems: Array<NavigationItem>;
 }
 
-export const extentionToFileType = (ext: string): FILE_TYPE | undefined => {
-  if (isExtAudio(ext)) {
-    return FILE_TYPE.AUDIO;
+export const extensionToFileType = (extension: string) => {
+  const EXTENSIONS_AUDIO = ['.mp3', '.ogg', '.wav'];
+  const EXTENSIONS_IMAGE = ['.jpg', '.jpeg', '.png'];
+  const EXTENSIONS_VIDEO = ['.mp4', '.webm'];
+
+  const extensionLowerCased = extension.toLowerCase();
+
+  if (EXTENSIONS_AUDIO.includes(extensionLowerCased)) {
+    return FILE_TYPES.AUDIO;
   }
 
-  if (isExtImage(ext)) {
-    return FILE_TYPE.IMAGE;
+  if (EXTENSIONS_IMAGE.includes(extensionLowerCased)) {
+    return FILE_TYPES.IMAGE;
   }
 
-  if (isExtVideo(ext)) {
-    return FILE_TYPE.VIDEO;
+  if (EXTENSIONS_VIDEO.includes(extensionLowerCased)) {
+    return FILE_TYPES.VIDEO;
   }
 
   return undefined;
 };
-
-export const isExtAudio = (ext: string): ext is EXT_AUDIO => Object.values<string>(EXT_AUDIO).includes(ext);
-
-export const isExtImage = (ext: string): ext is EXT_IMAGE => Object.values<string>(EXT_IMAGE).includes(ext);
-
-export const isExtVideo = (ext: string): ext is EXT_VIDEO => Object.values<string>(EXT_VIDEO).includes(ext);
-
-export const isItemFolder = (item: Item): item is ItemFolder => item.type === ITEM_TYPE.FOLDER;
-
-export const isItemFile = (item: Item): item is ItemFile => item.type === ITEM_TYPE.FILE;
-
-export const isItemAudio = (item: Item): item is ItemAudio => isItemFile(item) && isExtAudio(item.ext);
-
-export const isItemImage = (item: Item): item is ItemImage => isItemFile(item) && isExtImage(item.ext);
-
-export const isItemVideo = (item: Item): item is ItemVideo => isItemFile(item) && isExtVideo(item.ext);
