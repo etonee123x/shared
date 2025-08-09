@@ -26,19 +26,21 @@ export interface ItemFolder extends ItemBase {
   itemType: typeof ITEM_TYPES.FOLDER;
 }
 
-export interface ItemFile<FileType extends keyof typeof FILE_TYPES = keyof typeof FILE_TYPES> extends ItemBase {
+export interface ItemFileBase<FileType extends keyof typeof FILE_TYPES = keyof typeof FILE_TYPES> extends ItemBase {
   itemType: typeof ITEM_TYPES.FILE;
   fileType: FileType;
   ext: string;
 }
 
-export interface ItemAudio extends ItemFile<typeof FILE_TYPES.AUDIO> {
+export interface ItemAudio extends ItemFileBase<typeof FILE_TYPES.AUDIO> {
   musicMetadata: MusicMetadata;
 }
 
-export interface ItemImage extends ItemFile<typeof FILE_TYPES.IMAGE> {}
+export interface ItemImage extends ItemFileBase<typeof FILE_TYPES.IMAGE> {}
 
-export interface ItemVideo extends ItemFile<typeof FILE_TYPES.VIDEO> {}
+export interface ItemVideo extends ItemFileBase<typeof FILE_TYPES.VIDEO> {}
+
+export type ItemFile = ItemAudio | ItemImage | ItemVideo;
 
 export type Item = ItemFile | ItemFolder;
 
