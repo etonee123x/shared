@@ -10,6 +10,7 @@ export const FILE_TYPES = {
   AUDIO: 'AUDIO',
   IMAGE: 'IMAGE',
   VIDEO: 'VIDEO',
+  UNKNOWN: 'UNKNOWN',
 } as const;
 
 export interface MusicMetadata
@@ -40,7 +41,9 @@ export interface ItemImage extends ItemFileBase<typeof FILE_TYPES.IMAGE> {}
 
 export interface ItemVideo extends ItemFileBase<typeof FILE_TYPES.VIDEO> {}
 
-export type ItemFile = ItemAudio | ItemImage | ItemVideo;
+export interface ItemUnknown extends ItemFileBase<typeof FILE_TYPES.UNKNOWN> {}
+
+export type ItemFile = ItemAudio | ItemImage | ItemVideo | ItemUnknown;
 
 export type Item = ItemFile | ItemFolder;
 
