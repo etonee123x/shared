@@ -6,6 +6,12 @@ export enum ITEM_TYPE {
   FILE = 'file',
 }
 
+export enum FILE_TYPE {
+  AUDIO = 'audio',
+  IMAGE = 'image',
+  VIDEO = 'video',
+}
+
 export enum EXT_AUDIO {
   MP3 = '.mp3',
   OGG = '.ogg',
@@ -114,6 +120,22 @@ export interface FolderData {
   lvlUp: string | null;
   navigationItems: Array<NavigationItem>;
 }
+
+export const extentionToFileType = (ext: string): FILE_TYPE | undefined => {
+  if (isExtAudio(ext)) {
+    return FILE_TYPE.AUDIO;
+  }
+
+  if (isExtImage(ext)) {
+    return FILE_TYPE.IMAGE;
+  }
+
+  if (isExtVideo(ext)) {
+    return FILE_TYPE.VIDEO;
+  }
+
+  return undefined;
+};
 
 export const isExtAudio = (ext: string): ext is EXT_AUDIO => Object.values<string>(EXT_AUDIO).includes(ext);
 
