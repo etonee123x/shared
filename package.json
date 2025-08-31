@@ -10,15 +10,15 @@
     "build": "tsc",
     "prepare": "npm run build"
   },
-  "module": "./dist/esm/index.js",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.ts",
-      "default": "./dist/cjs/index.js"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./*": {
-      "types": "./dist/esm/*.d.ts",
-      "default": "./dist/esm/*.js"
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
     }
   },
   "files": [
