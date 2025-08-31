@@ -26,12 +26,12 @@
     },
     "./*": {
       "import": {
-        "types": "./dist/esm/*",
-        "default": "./dist/esm/*"
+        "types": "./dist/esm/*.d.ts",
+        "default": "./dist/esm/*.js"
       },
       "require": {
-        "types": "./dist/cjs/*",
-        "default": "./dist/cjs/*"
+        "types": "./dist/cjs/*.d.ts",
+        "default": "./dist/cjs/*.js"
       }
     }
   },
