@@ -20,8 +20,6 @@ export * from './utils/isBigint';
 
 export * from './utils/isBoolean';
 
-export * from './utils/isEqual';
-
 export * from './utils/isFunction';
 
 export * from './utils/isNil';
