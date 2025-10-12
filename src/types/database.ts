@@ -18,9 +18,12 @@ export type ForPut<T extends WithDatabaseMeta> = T;
 
 export type ForPatch<T extends WithDatabaseMeta> = Partial<T>;
 
-export interface PaginationMeta {
-  perPage: number;
+export interface WithPage {
   page: number;
+}
+
+export interface PaginationMeta extends WithPage {
+  perPage: number;
 }
 
 export interface WithIsEnd {
