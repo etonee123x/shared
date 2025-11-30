@@ -13,6 +13,11 @@ export const FILE_TYPES = {
   UNKNOWN: 'UNKNOWN',
 } as const;
 
+export interface Size {
+  width: number;
+  height: number;
+}
+
 export interface MusicMetadata
   extends Pick<ICommonTagsResult, 'album' | 'bpm' | 'year' | 'artists'>,
     Pick<IFormat, 'bitrate' | 'duration'> {}
@@ -37,9 +42,13 @@ export interface ItemAudio extends ItemFileBase<typeof FILE_TYPES.AUDIO> {
   musicMetadata: MusicMetadata;
 }
 
-export interface ItemImage extends ItemFileBase<typeof FILE_TYPES.IMAGE> {}
+export interface ItemImage extends ItemFileBase<typeof FILE_TYPES.IMAGE> {
+  size: Size;
+}
 
-export interface ItemVideo extends ItemFileBase<typeof FILE_TYPES.VIDEO> {}
+export interface ItemVideo extends ItemFileBase<typeof FILE_TYPES.VIDEO> {
+  size: Size;
+}
 
 export interface ItemUnknown extends ItemFileBase<typeof FILE_TYPES.UNKNOWN> {}
 
