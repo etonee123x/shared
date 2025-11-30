@@ -35,7 +35,6 @@ export interface ItemFolder extends ItemBase {
 export interface ItemFileBase<FileType extends keyof typeof FILE_TYPES = keyof typeof FILE_TYPES> extends ItemBase {
   itemType: typeof ITEM_TYPES.FILE;
   fileType: FileType;
-  ext: string;
 }
 
 export interface ItemAudio extends ItemFileBase<typeof FILE_TYPES.AUDIO> {
