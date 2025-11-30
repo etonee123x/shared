@@ -87,5 +87,5 @@ export const extensionToFileType = (extension: string) => {
     return FILE_TYPES.VIDEO;
   }
 
-  return undefined;
+  return null;
 };
