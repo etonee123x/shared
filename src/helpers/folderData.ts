@@ -20,8 +20,6 @@ interface Size {
 
 export interface ItemBase extends WithMeta<WithTimestamps> {
   name: string;
-  url: string;
-  src: string;
 }
 
 export interface ItemFolder extends ItemBase {
