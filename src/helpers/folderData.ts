@@ -13,14 +13,10 @@ export const FILE_TYPES = {
   UNKNOWN: 'UNKNOWN',
 } as const;
 
-export interface Size {
+interface Size {
   width: number;
   height: number;
 }
-
-export interface MusicMetadata
-  extends Pick<ICommonTagsResult, 'album' | 'bpm' | 'year' | 'artists'>,
-    Pick<IFormat, 'bitrate' | 'duration'> {}
 
 export interface ItemBase extends WithMeta<WithTimestamps> {
   name: string;
@@ -38,15 +34,15 @@ export interface ItemFileBase<FileType extends keyof typeof FILE_TYPES = keyof t
 }
 
 export interface ItemAudio extends ItemFileBase<typeof FILE_TYPES.AUDIO> {
-  musicMetadata: MusicMetadata;
+  metadata: Pick<ICommonTagsResult, 'album' | 'bpm' | 'year' | 'artists'> & Pick<IFormat, 'bitrate' | 'duration'>;
 }
 
 export interface ItemImage extends ItemFileBase<typeof FILE_TYPES.IMAGE> {
-  size: Size;
+  metadata: Size;
 }
 
 export interface ItemVideo extends ItemFileBase<typeof FILE_TYPES.VIDEO> {
-  size: Size;
+  metadata: Size;
 }
 
 export interface ItemUnknown extends ItemFileBase<typeof FILE_TYPES.UNKNOWN> {}
