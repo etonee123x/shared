@@ -1,5 +1,7 @@
 export * from './types/index';
 
+export * from './utils/_throw';
+
 export * from './utils/checkExhaustive';
 
 export * from './utils/isNil';
